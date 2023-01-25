@@ -11,7 +11,7 @@ from rest_framework import filters
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = (permissions.IsAuthenticated, AuthorOrReadOnly)
+    permission_classes = (AuthorOrReadOnly, )
     pagination_class = LimitOffsetPagination
 
     def perform_create(self, serializer):
@@ -25,7 +25,7 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
 
 class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
-    permission_classes = [AuthorOrReadOnly, permissions.IsAuthenticated]
+    permission_classes = (AuthorOrReadOnly, permissions.IsAuthenticated)
 
     def get_post(self):
         post_id = self.kwargs.get('post_id')
@@ -42,7 +42,7 @@ class CommentViewSet(viewsets.ModelViewSet):
 
 class FollowViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
-    permission_classes = [permissions.IsAuthenticated, ]
+    permission_classes = (permissions.IsAuthenticated, )
     filter_backends = (filters.SearchFilter,)
     search_fields = ('following__username',)
 
