@@ -23,7 +23,10 @@ class Post(models.Model):
         upload_to='posts/', null=True, blank=True
     )
     group = models.ForeignKey(
-        Group, on_delete=models.CASCADE, related_name='group'
+        Group, on_delete=models.CASCADE,
+        related_name='group',
+        blank=True,
+        null=True
     )
 
     def __str__(self):
