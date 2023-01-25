@@ -6,15 +6,6 @@ from django.shortcuts import get_object_or_404
 from .permissions import AuthorOrReadOnly
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework import filters
-from rest_framework import mixins
-
-
-class ListCreateViewSet(
-    mixins.ListModelMixin,
-    mixins.CreateModelMixin,
-    viewsets.GenericViewSet
-):
-    pass
 
 
 class PostViewSet(viewsets.ModelViewSet):
