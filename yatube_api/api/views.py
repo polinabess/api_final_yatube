@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from posts.models import Post, Group, User
+from posts.models import Post, Group
 from .serializers import (
     PostSerializer,
     GroupSerializer,
@@ -56,7 +56,7 @@ class FollowViewSet(FollowMixinViewSet):
         return self.request.user
 
     def get_queryset(self):
-        user = User.objects.get(id=self.get_user().id)
+        user = self.get_user()
         return user.follow.all()
 
     def perform_create(self, serializer):
